@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const ManageClasses = () => {
     // const [data,setData] = useState([])
+  
     const {data, isLoading, refetch} = useQuery({
         queryKey: ['class'],
         queryFn: async() => {
@@ -85,7 +87,7 @@ const ManageClasses = () => {
                 <button onClick={()=>handleSubmit(info._id,'denied')} className="btn btn-ghost hover:btn-warning btn-xs">Deny</button>
                 </th>
                 <th>
-                <button onClick={()=>handleSubmit(info._id,'denied')} className="btn btn-ghost hover:btn-primary btn-xs">Send Feedback</button>
+               <Link to='/dashboard/feedback' state={{id:info._id}}><button className="btn btn-ghost hover:btn-primary btn-xs">Send Feedback</button></Link>
                 </th>
               </tr>
             ))}

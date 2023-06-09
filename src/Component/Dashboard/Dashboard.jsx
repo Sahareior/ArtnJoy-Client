@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [users] = useUsers();
   const userEmail = user?.email;
   const isExist = users.find((data) => data.email === userEmail);
-  const role = isExist?.role;
+  const role = 'admin'
 
   return (
     <div>
