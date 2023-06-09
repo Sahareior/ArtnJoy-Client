@@ -18,8 +18,38 @@ const ManageUsers = () => {
         .then(result => console.log(result))
         refetch()
     }
-    const makeInstructor =(id)=>{
-        const data = { role: "instructor" };
+    const removeAdmin =(id)=>{
+        const data = { role: "none" };
+
+        fetch(`http://localhost:5000/users/${id}`,{
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+              body:JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => console.log(result))
+        refetch()
+    }
+    const makeInstructor =(id,isIns)=>{
+        const data = { instructor:isIns};
+        console.log(data)
+
+        fetch(`http://localhost:5000/users/${id}`,{
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+              body:JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => console.log(result))
+        refetch()
+    }
+    const removeInstructor =(id,isIns)=>{
+        const data = { instructor:isIns};
+        console.log(data)
 
         fetch(`http://localhost:5000/users/${id}`,{
             method:'PATCH',
@@ -75,15 +105,23 @@ const ManageUsers = () => {
         <td>
           {data.email}
         </td>
-        <td>{data.role? "yes":"no"}</td>
+        <td>{data.role === "admin"? "yes":"no"}</td>
         <th>
-          <td>{data.role ==="instructor"? "yes": "no"}</td>
+          <td>{data.instructor ==="yes"? "yes": "no"}</td>
         </th>
         <th>
-          <button onClick={()=>makeAdmin(data._id)} className="btn btn-secondary btn-xs">Make an Admin</button>
+        {data.role==='admin'?<div><button onClick={()=>removeAdmin(data._id,"admin")} className="btn btn-secondary btn-xs">Remove Admin </button></div>
+      :
+      <div><button onClick={()=>makeAdmin(data._id,)} className="btn btn-secondary btn-xs">MAke Admin</button></div>  
+      }
+          
         </th>
         <th>
-          <button onClick={()=>makeInstructor(data._id)} className="btn btn-success btn-xs">Make an instructor</button>
+         {
+          data.instructor === "yes"? <div> <button onClick={()=>removeInstructor(data._id,"no")} className="btn btn-success btn-xs">Remove this instructor</button></div>
+          :
+          <div> <button onClick={()=>makeInstructor(data._id,"yes")} className="btn btn-success btn-xs">Make an instructor</button></div>
+         }
         </th>
       </tr>)
    }

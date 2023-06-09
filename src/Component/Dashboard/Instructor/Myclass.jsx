@@ -22,7 +22,7 @@ const Myclass = () => {
               <th>Name</th>
               <th>Price</th>
               <th>Status</th>
-              <th></th>
+              <th>Admin FeedBack</th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +48,7 @@ const Myclass = () => {
                 </td>
                 <td>{info.price} $</td>
                 <td>{info.status}</td>
-                <th></th>
+                <th>{info.feedback}</th>
               </tr>
             ))}
           </tbody>
