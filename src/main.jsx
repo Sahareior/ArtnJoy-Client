@@ -20,6 +20,7 @@ import ManageUsers from './Component/Dashboard/Admin/ManageUsers.jsx';
 import AddClass from './Component/Dashboard/Instructor/AddClass.jsx';
 import Myclass from './Component/Dashboard/Instructor/Myclass.jsx';
 import Feedback from './Component/Dashboard/Admin/Feedback.jsx';
+import AdminRoute from './Component/Routes/AdminRoute.jsx';
 
 const queryClient = new QueryClient();
 
@@ -64,11 +65,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'classes',
-        element: <ManageClasses></ManageClasses>,
+        element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>,
       },
       {
         path: 'users',
-        element: <ManageUsers></ManageUsers>,
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
       },
       {
         path:'addclass',

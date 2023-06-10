@@ -10,15 +10,10 @@ const Classes = () => {
     },[])
     return (
         <div>
-            <div className="hero min-h-screen" style={{backgroundImage: 'url(https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/04/services_hero.jpg)'}}>
+            <div className="h-[568px] relative w-full" style={{backgroundImage: 'url(https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/04/services_hero.jpg)'}}>
                 <div className="hero-overlay bg-opacity-60"></div>
-                <div className="hero-content text-center text-neutral-content">
-                    <div className="max-w-md">
-                        <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                        <p className="mb-5">WellCome to Your Class</p>
-
-                    </div>
-                </div>
+              <h1 className="absolute font-mono left-72 text-5xl text-yellow-400 top-52">Our Classes......</h1>
+                <h1 className="absolute font-thin right-80 text-5xl text-white bottom-52" >Select your Favorite one!!</h1>
             </div>
             {
                 data.map((info,index) => <Banner key={index} info={info}></Banner>)

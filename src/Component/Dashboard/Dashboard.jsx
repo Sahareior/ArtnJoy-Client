@@ -3,15 +3,14 @@ import { Link, Outlet } from 'react-router-dom';
 import useUsers from '../hooks/useUsers';
 import useAuth from '../hooks/useAuth';
 
+
 const Dashboard = () => {
+  
   const { user } = useAuth();
   const [users] = useUsers();
   const userEmail = user?.email;
   const isExist = users.find((data) => data.email === userEmail);
-  // const role = isExist?.role; 
-  // const role = 'instructor'
-  const role = 'admin'
-
+  const role = isExist?.role;
   return (
     <div>
       <div className="drawer lg:drawer-open">

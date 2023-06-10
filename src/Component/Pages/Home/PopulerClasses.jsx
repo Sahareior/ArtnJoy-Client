@@ -35,7 +35,7 @@ console.log("data",data)
                 }
             </div>
            <div className="mt-10">
-           <Heading title={"Populer Ins"} des={"Heres is Our Populer Ins"}></Heading>
+           <Heading title={"Populer Ins"} des={"Heres is Our Populer Instructor"}></Heading>
            <div>
             <PopulerIns newArray ={sortedArray}></PopulerIns>
            </div>

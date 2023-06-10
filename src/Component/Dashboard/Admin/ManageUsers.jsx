@@ -15,8 +15,10 @@ const ManageUsers = () => {
               body:JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(result => console.log(result))
-        refetch()
+        .then(result =>{
+          console.log(result)
+          refetch()
+        } )
     }
     const removeAdmin =(id)=>{
         const data = { role: "none" };
@@ -29,8 +31,10 @@ const ManageUsers = () => {
               body:JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(result => console.log(result))
-        refetch()
+        .then(result =>{
+          console.log(result)
+          refetch()
+        } )
     }
     const makeInstructor =(id,isIns)=>{
         const data = { instructor:isIns};
@@ -44,8 +48,10 @@ const ManageUsers = () => {
               body:JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(result => console.log(result))
-        refetch()
+        .then(result =>{
+          console.log(result)
+          refetch()
+        } )
     }
     const removeInstructor =(id,isIns)=>{
         const data = { instructor:isIns};
@@ -59,8 +65,10 @@ const ManageUsers = () => {
               body:JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(result => console.log(result))
-        refetch()
+        .then(result =>{
+          console.log(result)
+          refetch()
+        } )
     }
     return (
         <div>

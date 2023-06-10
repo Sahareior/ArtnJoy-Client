@@ -8,6 +8,7 @@ import useAuth from '../../hooks/useAuth';
 const Nav = () => {
     const {logout,user} = useAuth()
 
+
     return (
         <div  className="navbar fixed text-white max-w-screen-2xl z-10  bg-opacity-30 bg-black">
         <div className="navbar-start">
@@ -42,10 +43,13 @@ const Nav = () => {
           {/* <a className=""><FaInstagram /></a>
           <a className=""><FaYoutube /></a>
           <a className=""><FaFacebook /></a> */}
+          {
+            user && <p className='mr-9'>Hii {user?.displayName}</p>
+          }
               <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <img src={user?.photoURL}/>
         </div>
       </label>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
