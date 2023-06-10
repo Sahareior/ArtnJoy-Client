@@ -1,43 +1,44 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const ManageClasses = () => {
-    // const [data,setData] = useState([])
-  
-    const {data, isLoading, refetch} = useQuery({
-        queryKey: ['class'],
-        queryFn: async() => {
-            const res = await fetch('http://localhost:5000/class');
-            return res.json();
-        }
-    })
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["class"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/class");
+      return res.json();
+    },
+  });
 
-
-    // useEffect(()=>{
-    //     fetch('http://localhost:5000/class')
-    //     .then(res=> res.json())
-    //     .then(result => setData(result))
-    // },[])
-    const handleSubmit =(id,data)=>{
-        fetch(`http://localhost:5000/class/${id}`,{
-            method:'PATCH',
-            headers:{
-                'content-type': 'application/json'
-            },
-            body:JSON.stringify({data})
-        })
-        .then(res=> res.json())
-        .then(result =>{
-            console.log(result)
-            refetch()
-        })
-        
+  const { mutate: updateClassStatus } = useMutation(
+    async ({ id, status }) => {
+      const res = await fetch(`http://localhost:5000/class/${id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      });
+      return res.json();
     }
-    return (
-        <div>
-              <div className="overflow-x-auto">
+  );
+
+  const handleApprove = (id) => {
+    updateClassStatus({ id, status: "approved" }).then(() => {
+      refetch();
+    });
+  };
+
+  const handleDeny = (id) => {
+    updateClassStatus({ id, status: "denied" }).then(() => {
+      refetch();
+    });
+  };
+
+  return (
+    <div>
+      <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
           <thead>
@@ -81,21 +82,42 @@ const ManageClasses = () => {
                 <td>{info.email} </td>
                 <td>{info.status}</td>
                 <th>
-                <button onClick={()=>handleSubmit(info._id,'approved')} className="btn btn-ghost hover:btn-secondary btn-xs">Approve</button>
+                  {info.status === "pending" && (
+                    <button
+                      onClick={() => handleApprove(info._id)}
+                      className="btn btn-ghost hover:btn-secondary btn-xs"
+                    >
+                      Approve
+                    </button>
+                  )}
                 </th>
                 <th>
-                <button onClick={()=>handleSubmit(info._id,'denied')} className="btn btn-ghost hover:btn-warning btn-xs">Deny</button>
+                  {info.status === "pending" && (
+                    <button
+                      onClick={() => handleDeny(info._id)}
+                      className="btn btn-ghost hover:btn-warning btn-xs"
+                    >
+                      Deny
+                    </button>
+                  )}
                 </th>
                 <th>
-               <Link to='/dashboard/feedback' state={{id:info._id}}><button className="btn btn-ghost hover:btn-primary btn-xs">Send Feedback</button></Link>
+                  <Link
+                    to="/dashboard/feedback"
+                    state={{ id: info._id }}
+                  >
+                    <button className="btn btn-ghost hover:btn-primary btn-xs">
+                      Send Feedback
+                    </button>
+                  </Link>
                 </th>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ManageClasses;

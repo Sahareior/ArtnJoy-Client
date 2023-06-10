@@ -3,7 +3,7 @@ import Heading from '../../Shared/Heading';
 import useAuth from '../../hooks/useAuth';
 
 const AddClass = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,reset } = useForm();
   const {user} = useAuth()
   
 
@@ -33,6 +33,7 @@ const AddClass = () => {
     .then(result => console.log(result))
 
    console.log(newClass)
+   reset()
   };
 
   return (

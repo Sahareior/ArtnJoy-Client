@@ -11,6 +11,7 @@ const Dashboard = () => {
   const userEmail = user?.email;
   const isExist = users.find((data) => data.email === userEmail);
   const role = isExist?.role;
+  const isInstructor = isExist?.instructor === 'yes';
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -35,7 +36,7 @@ const Dashboard = () => {
                 </li>
               </div>
             )}
-            {role === 'instructor' && (
+            {isInstructor && (
               <div>
                 <li>
                   <Link to="/dashboard/addclass">Add a class</Link>
@@ -45,7 +46,7 @@ const Dashboard = () => {
                 </li>
               </div>
             )}
-            {role !== 'admin' && role !== 'instructor' && (
+            {role !== 'admin' && !isInstructor && (
               <div>
                 <li>
                   <Link to="/dashboard/selected">My Selected Classes</Link>

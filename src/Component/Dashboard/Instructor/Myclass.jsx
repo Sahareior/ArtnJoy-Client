@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const Myclass = () => {
+  const {user} = useAuth()
   const [data, setData] = useState([]);
+  const email = user?.email
   useEffect(() => {
-    fetch("http://localhost:5000/class/mama@mami2.com")
+    fetch(`http://localhost:5000/class/${email}`)
       .then((res) => res.json())
       .then((result) => setData(result));
   }, []);
@@ -22,6 +25,8 @@ const Myclass = () => {
               <th>Name</th>
               <th>Price</th>
               <th>Status</th>
+           
+              <th>Update</th>
               <th>Admin FeedBack</th>
             </tr>
           </thead>
@@ -48,7 +53,8 @@ const Myclass = () => {
                 </td>
                 <td>{info.price} $</td>
                 <td>{info.status}</td>
-                <th>{info.feedback}</th>
+                <td><button className="btn btn-xs btn-outline">Update</button></td>
+                <th>{info?.feedback}</th>
               </tr>
             ))}
           </tbody>
