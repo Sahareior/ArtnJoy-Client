@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const SelectedClasses = () => {
    const {user} = useAuth()
-    const [data,setData] = useState([])
+    // const [cart, setCart] = useState([])
     const email = user?.email
 
     const {data: cart= [], isLoading: loading, refetch} = useQuery({
@@ -15,6 +15,9 @@ const SelectedClasses = () => {
           return res.json();
       }
   })
+
+ 
+
 
     let total = 0 ;
     for(const price of cart){
@@ -51,6 +54,7 @@ const SelectedClasses = () => {
     <div className=" flex justify-between">
       <button className="btn btn-xs btn-primary">Buy Now</button>
       <button onClick={()=>handleDelete(info._id)} className="btn btn-xs btn-warning">Delete</button>
+      <button  className="btn btn-xs btn-warning">Buy</button>
     </div>
   </div>
 </div>

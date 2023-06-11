@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+
 
 const Myclass = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const [data, setData] = useState([]);
-  const email = user?.email
+
+  const email = user?.email;
+
   useEffect(() => {
     fetch(`http://localhost:5000/class/${email}`)
       .then((res) => res.json())
       .then((result) => setData(result));
   }, []);
+
   return (
     <div>
       <div className="overflow-x-auto">
@@ -25,7 +30,7 @@ const Myclass = () => {
               <th>Name</th>
               <th>Price</th>
               <th>Status</th>
-           
+              <th>Sits</th>
               <th>Update</th>
               <th>Admin FeedBack</th>
             </tr>
@@ -53,8 +58,9 @@ const Myclass = () => {
                 </td>
                 <td>{info.price} $</td>
                 <td>{info.status}</td>
-                <td><button className="btn btn-xs btn-outline">Update</button></td>
-                <th>{info?.feedback}</th>
+                <td>{info.availableSeats}</td>
+               <td> <Link to='/dashboard/update' state={info}> <button className="btn btn-secondary btn-xs">Update</button> </Link></td>
+                <th>{info?.feedback}</th> 
               </tr>
             ))}
           </tbody>

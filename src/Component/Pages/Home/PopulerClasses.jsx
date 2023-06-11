@@ -17,17 +17,17 @@ console.log("data",data)
     return (
         <div className="mt-20">
             <Heading title={"Populer Classes"} des={"Here is our populer Classes"}></Heading>
-            <div className="grid grid-cols-3 mt-14 gap-5">
+            <div className="grid grid-cols-3 mt-14 gap-y-28 gap-x-14 gap-5">
                 {
                     data.map((info,index) => 
                         <div key={index} className="card card-side bg-base-100 shadow-xl">
   <figure><img className="w-48" src={info.img} alt="Movie"/></figure>
   <div className="card-body">
-    <h2 className="card-title">{info.specialty}</h2>
+    <h2 className="card-title">{info.subject}</h2>
     <p><span className="text-yellow-500">Instructor name:</span> {info.name}</p>
     <p>Students Attending: {info.students}</p>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Watch</button>
+     
     </div>
   </div>
 </div>

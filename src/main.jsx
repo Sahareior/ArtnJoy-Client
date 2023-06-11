@@ -22,6 +22,8 @@ import Myclass from './Component/Dashboard/Instructor/Myclass.jsx';
 import Feedback from './Component/Dashboard/Admin/Feedback.jsx';
 import AdminRoute from './Component/Routes/AdminRoute.jsx';
 import InstructorRoute from './Component/Routes/InstructorRoute.jsx';
+import Checkout from './Component/Dashboard/Payments/Checkout.jsx';
+import Update from './Component/Dashboard/Instructor/Update.jsx';
 
 const queryClient = new QueryClient();
 
@@ -83,13 +85,22 @@ const router = createBrowserRouter([
       {
         path:'feedback',
         element:<Feedback></Feedback>
+      },
+      {
+        path:'update',
+        element:<Update></Update>
       }
     ],
   },
+  {
+    path:'checkout',
+    element:<Checkout></Checkout>
+  }
 ]);
 
 ReactDOM.render(
   <React.StrictMode>
+    <div className='w-[1240px] mx-auto'>
     <QueryClientProvider client={queryClient}>
       <MyProvider>
         <RouterProvider router={router}>
@@ -97,6 +108,7 @@ ReactDOM.render(
         </RouterProvider>
       </MyProvider>
     </QueryClientProvider>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
