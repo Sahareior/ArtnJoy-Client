@@ -18,6 +18,7 @@ const Dashboard = () => {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
           <Outlet></Outlet>
+          
           <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
             Open drawer
           </label>
@@ -56,6 +57,9 @@ const Dashboard = () => {
                 </li>
               </div>
             )}
+            <li>
+            <Link to='/'><h1>Back to the main page</h1></Link>
+            </li>
           </ul>
         </div>
       </div>

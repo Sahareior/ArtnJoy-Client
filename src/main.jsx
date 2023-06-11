@@ -21,6 +21,7 @@ import AddClass from './Component/Dashboard/Instructor/AddClass.jsx';
 import Myclass from './Component/Dashboard/Instructor/Myclass.jsx';
 import Feedback from './Component/Dashboard/Admin/Feedback.jsx';
 import AdminRoute from './Component/Routes/AdminRoute.jsx';
+import InstructorRoute from './Component/Routes/InstructorRoute.jsx';
 
 const queryClient = new QueryClient();
 
@@ -73,11 +74,11 @@ const router = createBrowserRouter([
       },
       {
         path:'addclass',
-        element: <AddClass></AddClass>
+        element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
       },
       {
         path:'myclass',
-        element:<Myclass></Myclass>
+        element:<InstructorRoute><Myclass></Myclass></InstructorRoute>
       },
       {
         path:'feedback',

@@ -43,7 +43,7 @@ const SelectedClasses = () => {
            {
             cart.map(info => 
                 <div key={info._id} className="card card-compact w-52 bg-base-100 shadow-xl">
-  <figure><img className="w-full h-52" src={info.info.img} alt="Shoes" /></figure>
+  <figure><img className="w-full h-52" src={info?.info?.img} alt="Shoes" /></figure>
   <div className="card-body">
     <h2 className="card-title">{info.info.subject}</h2>
     <h2>Instructor: {info.info.name}</h2>

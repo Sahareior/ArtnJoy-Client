@@ -1,13 +1,12 @@
-
-import { Navigate, useLocation } from 'react-router-dom';
+import { Vortex } from  'react-loader-spinner'
 import useAuth from '../hooks/useAuth';
-import {Vortex } from  'react-loader-spinner'
 import useAdmin from '../hooks/useAdmin';
+import { Navigate } from 'react-router-dom';
 
-const AdminRoute = ({children}) => {
+const InstructorRoute = ({children}) => {
     const{user,loading} = useAuth()
     const [admin, Adminloading] = useAdmin()
-    const location = useLocation()
+
     
 
 
@@ -23,12 +22,11 @@ const AdminRoute = ({children}) => {
       colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
     />
     }
-    if(user && admin[0]?.role ==='admin'){
+    if(user && admin[0]?.instructor==='yes'){
       return children
     }
 
     return <Navigate to="/" state={{from: location}} replace></Navigate>
-
 };
 
-export default AdminRoute;
+export default InstructorRoute;
