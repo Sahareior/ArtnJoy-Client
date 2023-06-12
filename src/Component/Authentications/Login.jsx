@@ -1,12 +1,16 @@
 import { useForm } from 'react-hook-form';
 import useAuth from '../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [clicked, setClicked] = useState(false);
-  const { login } = useAuth();
+  const { login, googleSignIn } = useAuth();
+  const navigate = useNavigate()
+  const location = useLocation()
+  
+  const path = location.state?.state?.pathname || '/'
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -16,6 +20,7 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        navigate(path)
         // ...
       })
       .catch((error) => {
@@ -28,7 +33,15 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setClicked(!clicked);
   };
-
+  const google = async () => {
+    try {
+      await googleSignIn();
+      navigate(path);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -36,8 +49,7 @@ const Login = () => {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
-              deleniti eaque aut repudiandae et a id nisi.
+              <button className='btn btn-primary' onClick={google}>Sign in With Google</button>
             </p>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

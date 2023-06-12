@@ -24,6 +24,7 @@ import AdminRoute from './Component/Routes/AdminRoute.jsx';
 import InstructorRoute from './Component/Routes/InstructorRoute.jsx';
 import Checkout from './Component/Dashboard/Payments/Checkout.jsx';
 import Update from './Component/Dashboard/Instructor/Update.jsx';
+import PrivateRoute from './Component/Routes/PrivateRoute.jsx';
 
 const queryClient = new QueryClient();
 
@@ -60,11 +61,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'selected',
-        element: <SelectedClasses></SelectedClasses>,
+        element: <PrivateRoute><SelectedClasses></SelectedClasses></PrivateRoute>,
       },
       {
         path: 'enrolled',
-        element: <EnrolledClasses></EnrolledClasses>,
+        element: <PrivateRoute><EnrolledClasses></EnrolledClasses></PrivateRoute>,
       },
       {
         path: 'classes',

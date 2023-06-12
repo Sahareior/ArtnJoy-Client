@@ -40,9 +40,11 @@ const SelectedClasses = () => {
     return (
        <div className="mt-20">
         <Heading title={'Your Cart'}></Heading>
-        <h1 className="mt-20">Your total price : {total}</h1>
+       <div>
+       <h1 className="mt-20">Your total price : {total}</h1>
         <h1>Total items {cart.length}</h1>
-        <div className="grid grid-cols-4 gap-6 p-20">
+       </div>
+        <div className="grid grid-cols-2 mt-9 gap-8">
            {
             cart.map(info => 
                 <div key={info._id} className="card card-compact w-52 bg-base-100 shadow-xl">
