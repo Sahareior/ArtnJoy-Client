@@ -2,14 +2,15 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 
-const CheckoutForm = ({info,total}) => {
+const CheckoutForm = ({info,total,id}) => {
   // const {_id,info} = cart
   const [clientSecret, setClientSecret] = useState("");
   const {user} = useAuth()
   const stripe = useStripe();
   const elements = useElements();
-console .log(info,total)
- 
+console .log(info.info.email)
+ const instructorEmail = info?.info?.email
+ const className = info?.info?.className
 
 
   useEffect(() => {
@@ -63,12 +64,19 @@ console.log('card',card)
 
 console.log(paymentIntent.status)
 if (paymentIntent.status === 'succeeded'){
+  const students = {
+    student:0,
+    instructor: instructorEmail,
+    className: className
+  }
   const payment = {
     email: user?.email,
     transactionId: paymentIntent.id,
     total,
     date: new Date(),
-    info
+    info,
+    product_id : id,
+    
     
   }
   fetch('http://localhost:5000/payment',{
@@ -76,10 +84,31 @@ if (paymentIntent.status === 'succeeded'){
     headers:{
       'content-type': 'application/json'
     },
-    body:JSON.stringify(payment)
+    body:JSON.stringify(payment) 
   })
   .then(res => res.json())
-  .then(result => console.log(result))
+  .then(result => {
+    console.log(result)
+    fetch('http://localhost:5000/students',{
+      method:'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body:JSON.stringify(students)
+    })
+    .then(res=> res.json())
+    .then(result => {
+      console.log(result)
+      fetch(`http://localhost:5000/students/${className}`,{
+        method:'PATCH'
+       
+      })
+      .then(res=> res.json())
+      .then(result => console.log(result))
+    })
+  })
+
+  
 }
 
   };

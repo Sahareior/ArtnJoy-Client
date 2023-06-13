@@ -20,7 +20,7 @@ console.log(id)
            
             <h2 className="text-3xl"> Teka o teka tumi uira uira aso...</h2>
             <Elements stripe={stripePromise}>
-                <CheckoutForm total={total} info={info}></CheckoutForm>
+                <CheckoutForm total={total} info={info} id={id}></CheckoutForm>
             </Elements>
         </div>
     );
