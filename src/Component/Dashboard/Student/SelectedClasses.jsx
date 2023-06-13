@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import Heading from "../../Shared/Heading";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
    const {user} = useAuth()
-    // const [cart, setCart] = useState([])
+    const [exists, setExists] = useState({})
     const email = user?.email
 
     const {data: cart= [], isLoading: loading, refetch} = useQuery({
@@ -16,52 +17,58 @@ const SelectedClasses = () => {
       }
   })
 
- 
-
-
     let total = 0 ;
     for(const price of cart){
-    const newPrice = parseFloat(price.info?.price?.slice(1))
-
-     total = total + newPrice
+      const newPrice = parseFloat(price.info?.price?.slice(1));
+      total = total + newPrice;
     }
-   const handleDelete =(id)=>{
+
+   const handleDelete = (id) => {
     fetch(`http://localhost:5000/cart/id/${id}`,{
-      method:"DELETE"
+      method: "DELETE"
     })
-    .then(res=> res.json())
+    .then(res => res.json())
     .then(result => {
       console.log(result)
       refetch()
-    })
+    });
    }
-   
+
+   const findData = (id) => {
+    const isExists = cart.find(d => d.id === id)
+    if(isExists){
+      setExists(isExists)
+    }
+   }
   
     return (
        <div className="mt-20">
         <Heading title={'Your Cart'}></Heading>
-       <div>
-       <h1 className="mt-20">Your total price : {total}</h1>
-        <h1>Total items {cart.length}</h1>
-       </div>
+        <div>
+          <h1 className="mt-20">Your total price : {total}</h1>
+          <h1>Total items {cart.length}</h1>
+        </div>
         <div className="grid grid-cols-2 mt-9 gap-8">
-           {
-            cart.map(info => 
-                <div key={info._id} className="card card-compact w-52 bg-base-100 shadow-xl">
-  <figure><img className="w-full h-52" src={info?.info?.img} alt="Shoes" /></figure>
-  <div className="card-body">
-    <h2 className="card-title">{info.info.subject}</h2>
-    <h2>Instructor: {info.info.name}</h2>
-    <p>{info.info.price}</p>
-    <div className=" flex justify-between">
-      <button className="btn btn-xs btn-primary">Buy Now</button>
-      <button onClick={()=>handleDelete(info._id)} className="btn btn-xs btn-warning">Delete</button>
-      <button  className="btn btn-xs btn-warning">Buy</button>
-    </div>
-  </div>
-</div>
-                )
-           }
+          {
+            cart.map(info => (
+              <div key={info._id} className="card card-compact w-52 bg-base-100 shadow-xl">
+                <figure><img className="w-full h-52" src={info?.info?.img} alt="Shoes" /></figure>
+                <div className="card-body">
+                  <h2 className="card-title">{info.info.subject}</h2>
+                  <h2>Instructor: {info.info.name}</h2>
+                  <p>{info.info.price}</p>
+                  <div className="flex justify-between">
+                    <button onClick={() => handleDelete(info._id)} className="btn btn-xs btn-warning">Delete</button>
+                    <Link to="/checkout" state={{ total: parseFloat(info.info.price.slice(1)), info: info }}>
+                      <button onClick={() => findData(info._id)} className="btn btn-xs btn-secondary">
+                        Enroll Now!
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
         </div>
        </div>
     );

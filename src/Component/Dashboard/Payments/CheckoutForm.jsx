@@ -1,35 +1,28 @@
-import React from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
-const CheckoutForm = () => {
-  const stripe = useStripe();
-  const {user} = useAuth()
-  const elements = useElements();
+const CheckoutForm = ({info,total}) => {
+  // const {_id,info} = cart
   const [clientSecret, setClientSecret] = useState("");
-  const totalPrice = 40
-  useEffect(() => {
-    if (totalPrice > 0) {
-      // Create PaymentIntent when totalPrice is calculated
-      fetch("http://localhost:5000/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ totalPrice }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setClientSecret(data.clientSecret);
-        })
-        .catch((error) => {
-          console.log(error);
-        //   setPaymentError("Error occurred while creating PaymentIntent");
-        });
-    }
-  }, [totalPrice]);
+  const {user} = useAuth()
+  const stripe = useStripe();
+  const elements = useElements();
+console .log(info,total)
+ 
 
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("http://localhost:5000/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ totalPrice:total }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, [total]);
+  console.log(clientSecret)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,42 +31,83 @@ const CheckoutForm = () => {
       return;
     }
 
-    const cardElement = elements.getElement(CardElement);
+    const card = elements.getElement(CardElement);
+
+    if (card == null) {
+      return;
+    }
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
-      card: cardElement,
+      card,
     });
-
+console.log('card',card)
     if (error) {
       console.log('[error]', error);
     } else {
       console.log('[PaymentMethod]', paymentMethod);
-      // Make API call to complete the payment process
     }
+
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    email: user?.email || 'unknown',
-                    name: user?.displayName || 'anonymous'
-                },
-            },
+      clientSecret,
+      {
+          payment_method: {
+              card: card,
+              billing_details: {
+                  email: user?.email || 'unknown',
+                  name: user?.displayName || 'anonymous'
+              },
+          },
+      },
+  );
+
+console.log(paymentIntent.status)
+if (paymentIntent.status === 'succeeded'){
+  const payment = {
+    email: user?.email,
+    transactionId: paymentIntent.id,
+    total,
+    date: new Date(),
+    info
+    
+  }
+  fetch('http://localhost:5000/payment',{
+    method:'POST',
+    headers:{
+      'content-type': 'application/json'
+    },
+    body:JSON.stringify(payment)
+  })
+  .then(res => res.json())
+  .then(result => console.log(result))
+}
+
+  };
+
+  
+
+  const cardElementOptions = {
+    style: {
+      base: {
+        fontSize: '16px',
+        color: '#4B5563',
+        '::placeholder': {
+          color: '#9CA3AF',
         },
-    );
+      },
+    },
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md my-[150px] mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <div className="mb-4">
-        <label htmlFor="card-details" className="block mb-2 font-semibold text-gray-700">
-          Card details
-        </label>
-        <CardElement options={{ style: { base: { fontSize: '16px' } } }} className="p-2 border border-gray-300 rounded" />
+        <CardElement className="p-2 border border-gray-300 rounded" options={cardElementOptions} />
       </div>
-      <button type="submit" disabled={!stripe} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded disabled:bg-gray-400 disabled:cursor-not-allowed">
+      <button
+        type="submit"
+        disabled={!stripe}
+        className="bg-blue-500 text-white py-2 px-4 rounded disabled:opacity-50 disabled:pointer-events-none"
+      >
         Pay
       </button>
     </form>

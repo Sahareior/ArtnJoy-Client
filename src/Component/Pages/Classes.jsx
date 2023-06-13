@@ -4,7 +4,7 @@ import Banner from "../Shared/Banner/Banner";
 const Classes = () => {
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/instructors')
+        fetch('http://localhost:5000/class')
         .then(res=> res.json())
         .then(result => setData(result))
     },[])

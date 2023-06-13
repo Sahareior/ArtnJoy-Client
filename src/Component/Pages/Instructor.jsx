@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 const Instructor = () => {
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/instructors')
+        fetch('http://localhost:5000/users')
         .then(res=>res.json())
         .then(result =>setData(result))
     },[])
-  
+  const instructor = data.filter(item => item?.instructor === "yes")
+  console.log(instructor)
     return (
-        <div>
+        <div className="p-52">
 <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
@@ -29,7 +30,7 @@ const Instructor = () => {
     <tbody>
       {/* row 1 */}
     {
-        data.map((info,index)=>   <tr key={index+1}>
+        instructor.map((info,index)=>   <tr key={index+1}>
             <th>
               <label>
                 <input type="checkbox" className="checkbox" />
@@ -68,6 +69,7 @@ const Instructor = () => {
     
   </table>
 </div>
+
         </div>
     );
 };

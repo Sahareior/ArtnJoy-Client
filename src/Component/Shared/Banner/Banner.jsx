@@ -20,8 +20,8 @@ if(user){
 }
  }
     return (
-        <div className="w-full relative h-[720px]" style={{backgroundImage: `url(${info.img})`,backgroundRepeat:"no-repeat"}}>
-           <div className="absolute right-0 flex flex-col  justify-center items-center top-28" >
+        <div className="w-full relative h-[720px]" style={{backgroundImage: `url(${info.classImage})`,backgroundRepeat:"no-repeat"}}>
+           <div className="absolute right-0 flex flex-col gap-4 justify-center items-center top-28" >
             <h1 className="text-5xl font-bold"> {info.subject}</h1>
             <h1 className="text-xl">instructor: {info.name}</h1>
             <h1 className="text-xl">Available seats: {info.students}</h1>
