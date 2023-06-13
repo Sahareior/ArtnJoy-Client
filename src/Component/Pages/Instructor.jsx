@@ -23,8 +23,8 @@ const Instructor = () => {
         </th>
         <th>Name</th>
         <th>Email</th>
-        <th>Favorite Color</th>
-        <th></th>
+    
+        
       </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@ const Instructor = () => {
         instructor.map((info,index)=>   <tr key={index+1}>
             <th>
               <label>
-                <input type="checkbox" className="checkbox" />
+                <h1>{index+1}</h1>
               </label>
             </th>
             <td>
@@ -54,10 +54,7 @@ const Instructor = () => {
           
             </td>
         
-            <td>Purple</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">details</button>
-            </th>
+          
           </tr>)
     }
       {/* row 2 */}

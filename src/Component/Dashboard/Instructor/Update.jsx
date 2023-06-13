@@ -29,7 +29,14 @@ fetch(`http://localhost:5000/class/${_id}`,{
     body:JSON.stringify(formData)
 })
 .then(res => res.json())
-.then(result => console.log(result))
+.then(result => {
+  console.log(result)
+  setName('');
+  setImage('');
+  setCost('');
+  setSeats('');
+  
+})
     // Pass the form data to the handleSubmit function in the parent component
 
   };
@@ -44,6 +51,7 @@ fetch(`http://localhost:5000/class/${_id}`,{
           <input
             type="text"
             id="name"
+            required
             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -55,6 +63,7 @@ fetch(`http://localhost:5000/class/${_id}`,{
           </label>
           <input
             type="text"
+            required
             id="image"
             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             value={image}
@@ -67,6 +76,7 @@ fetch(`http://localhost:5000/class/${_id}`,{
           </label>
           <input
             type="text"
+            required
             id="cost"
             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             value={cost}
@@ -79,6 +89,7 @@ fetch(`http://localhost:5000/class/${_id}`,{
           </label>
           <input
             type="text"
+            required
             id="seats"
             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             value={seats}
