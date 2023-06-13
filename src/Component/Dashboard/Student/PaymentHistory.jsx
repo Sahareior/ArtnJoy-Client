@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Heading from "../../Shared/Heading";
+import useAuth from "../../hooks/useAuth";
 
 
 const PaymentHistory = () => {
+    const {user} = useAuth()
+    console.log(user.email)
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/payment')
+        fetch(`http://localhost:5000/payment/${user.email}`)
         .then(res=> res.json())
         .then(result=>setData(result))
-    },[])
+    },[user.email])
     console.log(data)
     return (
         <div>

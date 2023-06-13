@@ -12,6 +12,8 @@ const Checkout = () => {
 //  }
 const total = location.state.total
 const info = location.state.info
+const id = location.state.id
+console.log(id)
     
     return (
         <div>

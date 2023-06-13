@@ -59,7 +59,7 @@ const SelectedClasses = () => {
                   <p>{info.info.price}</p>
                   <div className="flex justify-between">
                     <button onClick={() => handleDelete(info._id)} className="btn btn-xs btn-warning">Delete</button>
-                    <Link to="/checkout" state={{ total: parseFloat(info.info.price.slice(1)), info: info }}>
+                    <Link to="/checkout" state={{ total: parseFloat(info.info.price.slice(1)), info: info, id:info._id }}>
                       <button onClick={() => findData(info._id)} className="btn btn-xs btn-secondary">
                         Enroll Now!
                       </button>
