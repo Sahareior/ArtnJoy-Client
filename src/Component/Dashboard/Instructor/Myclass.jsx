@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import Heading from "../../Shared/Heading";
 
 
 const Myclass = () => {
   const { user } = useAuth();
   const [data, setData] = useState([]);
+  const [students,setStudents] = useState([])
 
   const email = user?.email;
 
@@ -13,10 +15,18 @@ const Myclass = () => {
     fetch(`http://localhost:5000/class/${email}`)
       .then((res) => res.json())
       .then((result) => setData(result));
-  }, []);
+  }, [email]);
+
+  useEffect(()=>{
+    fetch('http://localhost:5000/students')
+    .then(res=>res.json())
+    .then(result => setStudents(result))
+  },[])
+  console.log(students)
 
   return (
     <div>
+      <Heading des={'My Classes'}></Heading>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -65,6 +75,38 @@ const Myclass = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <Heading des={'Total Enrolled Students'}></Heading>
+      <div>
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>
+          
+              </th>
+              <th>Students</th>
+              <th>ClassName</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((info, index) => (
+              <tr key={info._id}>
+                <th>
+                  <label>{index + 1}</label>
+                </th>
+                <td>
+                {info.student}
+                </td>
+              
+                <td>{info.className}</td>
+               
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       </div>
     </div>
   );
