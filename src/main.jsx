@@ -26,6 +26,7 @@ import Checkout from './Component/Dashboard/Payments/Checkout.jsx';
 import Update from './Component/Dashboard/Instructor/Update.jsx';
 import PrivateRoute from './Component/Routes/PrivateRoute.jsx';
 import PaymentHistory from './Component/Dashboard/Student/PaymentHistory.jsx';
+import ErrorPage from './Component/Routes/ErrorPage.jsx';
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
