@@ -2,11 +2,33 @@ import { useEffect, useState } from "react";
 
 const Instructor = () => {
     const [data,setData] = useState([])
-    useEffect(()=>{
-        fetch('http://localhost:5000/users')
-        .then(res=>res.json())
-        .then(result =>setData(result))
-    },[])
+    const token = localStorage.getItem('access-token');
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/users', {
+            
+            headers: {
+              Authorization: `Bearer ${token}` // Replace `accessToken` with your actual token variable
+            }
+          });
+    
+          if (response.ok) {
+            const result = await response.json();
+            setData(result);
+          } else {
+            // Handle error response
+            console.log('Error:', response.status);
+          }
+        } catch (error) {
+          // Handle fetch error
+          console.log('Fetch Error:', error);
+        }
+      };
+    
+      fetchData();
+    }, [token]);
+    
   const instructor = data.filter(item => item?.instructor === "yes")
   console.log(instructor)
     return (

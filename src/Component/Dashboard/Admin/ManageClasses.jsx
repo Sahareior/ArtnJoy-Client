@@ -12,28 +12,28 @@ const ManageClasses = () => {
   });
 
   const { mutate: updateClassStatus } = useMutation(
-    async ({ id, status }) => {
+    async ({ id, data }) => {
       const res = await fetch(`http://localhost:5000/class/${id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ data }),
       });
       return res.json();
     }
   );
 
   const handleApprove = (id) => {
-    updateClassStatus({ id, status: "approved" }).then(() => {
+    updateClassStatus({ id, data: "approved" })
       refetch();
-    });
+    
   };
 
   const handleDeny = (id) => {
-    updateClassStatus({ id, status: "denied" }).then(() => {
+    updateClassStatus({ id, data: "denied" })
       refetch();
-    });
+
   };
 
   return (
@@ -82,24 +82,24 @@ const ManageClasses = () => {
                 <td>{info.email} </td>
                 <td>{info.status}</td>
                 <th>
-                  {info.status === "pending" && (
+                
                     <button
                       onClick={() => handleApprove(info._id)}
                       className="btn btn-ghost hover:btn-secondary btn-xs"
                     >
                       Approve
                     </button>
-                  )}
+ 
                 </th>
                 <th>
-                  {info.status === "pending" && (
+                  
                     <button
                       onClick={() => handleDeny(info._id)}
                       className="btn btn-ghost hover:btn-warning btn-xs"
                     >
                       Deny
                     </button>
-                  )}
+              
                 </th>
                 <th>
                   <Link

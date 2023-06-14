@@ -10,6 +10,7 @@ const Feedback = () => {
     const handleSubmit = (e)=>{
          e.preventDefault()
         const data = e.target.feedback.value 
+        console.log(data)
         if(data.length>8){
             fetch(`http://localhost:5000/class/${id}`,{
                 method:'PATCH',
