@@ -48,6 +48,7 @@ const Nav = () => {
           }
               <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+        {user? '':<h1 className='text-xs font-b'>Login?</h1>}
         <div className="w-10 rounded-full">
           <img src={user?.photoURL}/>
         </div>
