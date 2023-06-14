@@ -12,7 +12,7 @@ const PopulerIns = ({newArray}) => {
               <p>{data.name}</p>
               <p>Students : {data.students}</p>
               <div className="card-actions justify-end">
-                <button className="btn btn-primary">Watch</button>
+  
               </div>
             </div>
           </div> )

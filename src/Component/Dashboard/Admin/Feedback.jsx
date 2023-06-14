@@ -23,6 +23,7 @@ const Feedback = () => {
             .then(result =>{
                 console.log(result)
                 setError('')
+                e.target.feedback.value =" "
                 
             })
         }

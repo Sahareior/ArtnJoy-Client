@@ -1,10 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const Reg = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const { createUser, profile } = useAuth();
+  const navigate = useNavigate()
 
   const onSubmit = (data, e) => {
     const name = data.name;
@@ -30,7 +32,9 @@ const Reg = () => {
             // Signed in
             profile(name, imageUrl);
             console.log(userCredential);
+
             reset();
+            navigate('/')
           })
           .catch((error) => {
             const errorMessage = error.message;

@@ -13,7 +13,7 @@ const Banner = () => {
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         <SwiperSlide>
           <div
-            className="w-full h-[800px]"
+            className="w-full md:h-[800px] "
             style={{
               backgroundImage:
                 "url('https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/hero_home_02-slider.jpg')",

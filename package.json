@@ -24,9 +24,11 @@
     "react-photo-gallery": "^8.0.0",
     "react-router-dom": "^6.12.0",
     "react-slick": "^0.29.0",
+    "react-spring": "^9.7.1",
     "react-three-fiber": "^6.0.13",
     "slick-carousel": "^1.8.1",
     "stripe": "^12.9.0",
+    "sweetalert2": "^11.7.12",
     "swiper": "^9.3.2",
     "three": "^0.153.0"
   },
