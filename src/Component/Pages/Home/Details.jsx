@@ -7,7 +7,7 @@ const Details = () => {
   const studentsAnimation = useSpring({ number: 535, from: { number: 0 }, config: { duration: 2000 } });
 
   return (
-    <div className="mt-20 bg-base-100">
+    <div className="mt-20 mr-[600px] md:mr-1 bg-base-100">
       <div className="md:flex justify-around items-center mt-16">
         <div className="flex flex-col justify-center gap-6 items-center">
           <img className="w-20" src="https://img.freepik.com/free-vector/calendar-icon-white-background_1308-84634.jpg?size=626&ext=jpg" alt="" />

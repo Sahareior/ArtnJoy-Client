@@ -3,13 +3,13 @@ import './About.css'
 const About = () => {
     return (
         <div className='mt-28'>
-            <div>
+            <div className='mr-[700px] md:mr-0'>
                 <Heading title={"About US"} des={"Find what you want"}></Heading>
             </div>
             {/* <link href='https://fonts.googleapis.com/css?family=Wire+One|Raleway:300' rel='stylesheet' type='text/css' /> */}
 
-<div className="skew-c"></div>
-<div className="colour-block flex flex-col gap-3">
+<div className="skew-c "></div>
+<div className="colour-block flex m flex-col gap-3">
   <h1 className='text-5xl font-bold'>Location</h1>
   <p>Meggings fingerstache pariatur enim viral, fashion axe lomo meh authentic vexillologist incididunt adipisicing blog occupy williamsburg four dollar.</p>
     <button className='btn btn-outline'>See more...</button>

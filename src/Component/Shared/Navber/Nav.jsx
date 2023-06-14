@@ -34,7 +34,7 @@ const Nav = () => {
           <ul className="menu menu-horizontal px-1">
             <li><Link to='/'>Home</Link></li>
         
-            <li><Link to='/dashboard'>DashBoard</Link></li>
+          {user?   <li><Link to='/dashboard'>DashBoard</Link></li>:""}
             <li><Link to='/class'>Classes</Link></li>
             <li><Link to='/ins'>Instructors</Link></li>
           </ul>

@@ -9,11 +9,11 @@ import { Navigation } from "swiper";
 import Heading from "../../Shared/Heading";
 const Banner = () => {
   return (
-    <div>
+    <div className="p-16 w-[500px]">
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         <SwiperSlide>
           <div
-            className="w-full md:h-[800px] "
+            className="md:w-full w-[400px] md:h-[800px] "
             style={{
               backgroundImage:
                 "url('https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/hero_home_02-slider.jpg')",
@@ -25,7 +25,7 @@ const Banner = () => {
                 src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/draw_paint.png"
                 alt=""
               />
-              <div className="absolute z-30 top-72 left-0 w-full text-center">
+              <div className="absolute s z-30 md:top-72 top-16  md:left-0 w-full text-center">
                 <Heading title="Learn To" des="Draw & Paint" />
                 <button className="btn btn-secondary mt-7">Apply Today</button>
               </div>
@@ -34,7 +34,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="w-full h-[800px]"
+            className="md:w-full w-[400px] md:h-[800px]"
             style={{
               backgroundImage:
                 "url('https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_02.jpg')",

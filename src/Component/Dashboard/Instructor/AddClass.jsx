@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import Heading from '../../Shared/Heading';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const AddClass = () => {
   const { register, handleSubmit,reset } = useForm();
@@ -30,7 +31,17 @@ const AddClass = () => {
         body:JSON.stringify(newClass)
     })
     .then(res=> res.json())
-    .then(result => console.log(result))
+    .then(result => {
+       
+Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
+console.log(result)
+    })
 
    console.log(newClass)
    reset()

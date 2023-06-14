@@ -16,8 +16,8 @@ console.log("data",data)
     console.log(sortedArray)
     return (
         <div className="mt-20">
-            <Heading title={"Populer Classes"} des={"Here is our populer Classes"}></Heading>
-            <div className="grid grid-cols-3 mt-14 gap-y-28 gap-x-14 gap-5">
+           <div className="mr-[700px] md:mr-0"> <Heading title={"Populer Classes"} des={"Here is our populer Classes"}></Heading></div>
+            <div className="grid md:grid-cols-3 mt-14 gap-y-28 gap-x-14 gap-5">
                 {
                     data.map((info,index) => 
                         <div key={index} className="card card-side bg-base-100 shadow-xl">
@@ -34,7 +34,7 @@ console.log("data",data)
                         )
                 }
             </div>
-           <div className="mt-10">
+           <div className="mt-10 mr-[700px] md:mr-0">
            <Heading title={"Populer Ins"} des={"Heres is Our Populer Instructor"}></Heading>
            <div>
             <PopulerIns newArray ={sortedArray}></PopulerIns>

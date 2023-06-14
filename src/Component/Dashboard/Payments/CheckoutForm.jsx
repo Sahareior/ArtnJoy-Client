@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const CheckoutForm = ({info,total,id}) => {
   // const {_id,info} = cart
@@ -8,6 +9,7 @@ const CheckoutForm = ({info,total,id}) => {
   const {user} = useAuth()
   const stripe = useStripe();
   const elements = useElements();
+  const time = new Date()
 console .log(info.info.email)
  const instructorEmail = info?.info?.email
  const className = info?.info?.className
@@ -73,7 +75,7 @@ if (paymentIntent.status === 'succeeded'){
     email: user?.email,
     transactionId: paymentIntent.id,
     total,
-    date: new Date(),
+    date: `${time.toLocaleTimeString()} ${time.toLocaleDateString()}`,
     info,
     product_id : id,
     
@@ -88,6 +90,14 @@ if (paymentIntent.status === 'succeeded'){
   })
   .then(res => res.json())
   .then(result => {
+     
+Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Thanks',
+  showConfirmButton: false,
+  timer: 1500
+})
     console.log(result)
     fetch('http://localhost:5000/students',{
       method:'POST',

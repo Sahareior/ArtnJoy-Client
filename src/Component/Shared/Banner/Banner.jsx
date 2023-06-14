@@ -5,7 +5,7 @@ const Banner = ({ info }) => {
   const { user } = useAuth();
   const [users, loading, refetch] = useUsers();
   console.log(users);
-  const isExists = users.filter((find) => find.email === user?.email);
+  const isExists = users?.filter((find) => find.email === user?.email);
 //   console.log(isExists[0].role);
 
   const userEmail = user?.email;

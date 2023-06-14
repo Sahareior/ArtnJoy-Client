@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const Feedback = () => {
@@ -21,6 +22,14 @@ const Feedback = () => {
             })
             .then(res=> res.json())
             .then(result =>{
+                 
+Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Thanks',
+    showConfirmButton: false,
+    timer: 1500
+  })
                 console.log(result)
                 setError('')
                 e.target.feedback.value =" "

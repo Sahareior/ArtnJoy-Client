@@ -3,6 +3,7 @@ import Heading from "../../Shared/Heading";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SelectedClasses = () => {
    const {user} = useAuth()
@@ -16,12 +17,13 @@ const SelectedClasses = () => {
           return res.json();
       }
   })
-
+console.log(cart)
     let total = 0 ;
     for(const price of cart){
-      const newPrice = parseFloat(price.info?.price?.slice(1));
+      const newPrice = parseFloat(price.info?.price);
       total = total + newPrice;
     }
+    console.log(total)
 
    const handleDelete = (id) => {
     fetch(`http://localhost:5000/cart/id/${id}`,{
@@ -29,6 +31,14 @@ const SelectedClasses = () => {
     })
     .then(res => res.json())
     .then(result => {
+       
+Swal.fire({
+  position: 'top-end',
+  icon: 'center',
+  title: 'Deleted Sucessfully',
+  showConfirmButton: false,
+  timer: 1500
+})
       console.log(result)
       refetch()
     });
@@ -52,14 +62,14 @@ const SelectedClasses = () => {
           {
             cart.map(info => (
               <div key={info._id} className="card card-compact w-52 bg-base-100 shadow-xl">
-                <figure><img className="w-full h-52" src={info?.info?.img} alt="Shoes" /></figure>
+                <figure><img className="w-full h-52" src={info?.info?.classImage} alt="Shoes" /></figure>
                 <div className="card-body">
                   <h2 className="card-title">{info.info.subject}</h2>
                   <h2>Instructor: {info.info.name}</h2>
                   <p>{info.info.price}</p>
                   <div className="flex justify-between">
                     <button onClick={() => handleDelete(info._id)} className="btn btn-xs btn-warning">Delete</button>
-                    <Link to="/checkout" state={{ total: parseFloat(info.info.price.slice(1)), info: info, id:info._id }}>
+                    <Link to="/checkout" state={{ total: total, info: info, id:info._id }}>
                       <button onClick={() => findData(info._id)} className="btn btn-xs btn-secondary">
                         Enroll Now!
                       </button>

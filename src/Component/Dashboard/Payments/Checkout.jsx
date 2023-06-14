@@ -2,6 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useLocation } from "react-router-dom";
+import Heading from "../../Shared/Heading";
 
 
 // TODO: provide publishable Key
@@ -16,9 +17,9 @@ const id = location.state.id
 console.log(id)
     
     return (
-        <div>
+        <div className="mt-20 p-11">
            
-            <h2 className="text-3xl"> Teka o teka tumi uira uira aso...</h2>
+         <Heading des={'Payment'}></Heading>
             <Elements stripe={stripePromise}>
                 <CheckoutForm total={total} info={info} id={id}></CheckoutForm>
             </Elements>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Update = () => {
   const location = useLocation();
@@ -31,6 +32,13 @@ fetch(`http://localhost:5000/class/${_id}`,{
 .then(res => res.json())
 .then(result => {
   console.log(result)
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Your work has been saved',
+    showConfirmButton: false,
+    timer: 1500
+  })
   setName('');
   setImage('');
   setCost('');

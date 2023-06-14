@@ -14,7 +14,7 @@ const Sijan = () => {
   return (
     <Slider {...settings}>
       <div>
-                <div className="slider-details flex text-center">
+                <div className="slider-details w-[500px] md:w-full md:flex text-center">
                 <img src="https://img.freepik.com/free-vector/beautiful-purple-woman-surrounded-by-nature-illustration_53876-97561.jpg?size=626&ext=jpg" alt="Artwork 1" />
             <div className="flex justify-center items-center flex-col">
                 
@@ -24,7 +24,7 @@ const Sijan = () => {
         </div>
       </div>
       <div>
-         <div className="slider-details flex text-center" >
+         <div className="slider-details w-[500px] md:w-full md:flex text-center" >
          <img src="https://img.freepik.com/premium-vector/astronaut-riding-bmx-vector-illustration-artwork-with-moon-isolated-light-color-design_72076-232.jpg?size=626&ext=jpg" alt="Artwork 2" />
    
      <div className="flex justify-center items-center flex-col">
