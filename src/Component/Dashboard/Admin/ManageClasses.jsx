@@ -6,14 +6,18 @@ const ManageClasses = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["class"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/class");
+      const res = await fetch("https://assignment12-blue.vercel.app/class");
       return res.json();
     },
   });
 
+  useEffect(() => {
+    document.title = "ManageClass"; // Update the title here
+  }, []);
+
   const { mutate: updateClassStatus } = useMutation(
     async ({ id, data }) => {
-      const res = await fetch(`http://localhost:5000/class/${id}`, {
+      const res = await fetch(`https://assignment12-blue.vercel.app/class/${id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

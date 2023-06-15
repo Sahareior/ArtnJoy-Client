@@ -10,15 +10,17 @@ const Myclass = () => {
   const [students,setStudents] = useState([])
 
   const email = user?.email;
-
   useEffect(() => {
-    fetch(`http://localhost:5000/class/${email}`)
+    document.title = "My Class"; // Update the title here
+  }, []);
+  useEffect(() => {
+    fetch(`https://assignment12-blue.vercel.app/class/${email}`)
       .then((res) => res.json())
       .then((result) => setData(result));
   }, [email]);
 
   useEffect(()=>{
-    fetch('http://localhost:5000/students')
+    fetch('https://assignment12-blue.vercel.app/students')
     .then(res=>res.json())
     .then(result => setStudents(result))
   },[])

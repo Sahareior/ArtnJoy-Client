@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useUsers from "../../hooks/useUsers";
 
@@ -13,7 +14,7 @@ const Banner = ({ info }) => {
   const data = { userEmail, info };
   const handleClick = (info) => {
     if (user) {
-      fetch("http://localhost:5000/cart", {
+      fetch("https://assignment12-blue.vercel.app/cart", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -21,7 +22,16 @@ const Banner = ({ info }) => {
         body: JSON.stringify(data),
       })
         .then((res) => res.json())
-        .then((result) => console.log(result));
+        .then((result) => {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Item added to cart',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              console.log(result)
+        });
     }
   };
 

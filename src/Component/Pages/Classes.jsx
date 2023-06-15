@@ -3,8 +3,13 @@ import Banner from "../Shared/Banner/Banner";
 
 const Classes = () => {
     const [data,setData] = useState([])
+
+    useEffect(() => {
+        document.title = "Classes"; // Update the title here
+      }, []);
+
     useEffect(()=>{
-        fetch('http://localhost:5000/class')
+        fetch('https://assignment12-blue.vercel.app/class')
         .then(res=> res.json())
         .then(result => setData(result))
     },[])

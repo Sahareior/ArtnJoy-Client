@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -9,6 +10,10 @@ const Update = () => {
   const [image, setImage] = useState(classImage);
   const [cost, setCost] = useState(price);
   const [seats, setSeats] = useState(availableSeats);
+
+  useEffect(() => {
+    document.title = "Update"; // Update the title here
+  }, []);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +27,7 @@ const Update = () => {
     };
 console.log(formData)
 
-fetch(`http://localhost:5000/class/${_id}`,{
+fetch(`https://assignment12-blue.vercel.app/class/${_id}`,{
     method:"PUT",
     headers:{
         'content-type': 'application/json'

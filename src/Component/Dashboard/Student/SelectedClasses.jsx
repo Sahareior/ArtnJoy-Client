@@ -13,7 +13,7 @@ const SelectedClasses = () => {
     const {data: cart= [], isLoading: loading, refetch} = useQuery({
       queryKey: ['users',email],
       queryFn: async() => {
-          const res = await fetch(`http://localhost:5000/cart/${email}`);
+          const res = await fetch(`https://assignment12-blue.vercel.app/cart/${email}`);
           return res.json();
       }
   })
@@ -23,18 +23,21 @@ console.log(cart)
       const newPrice = parseFloat(price.info?.price);
       total = total + newPrice;
     }
-    console.log(total)
+   
+    useEffect(() => {
+      document.title = "Selected Class"; // Update the title here
+    }, []);
 
    const handleDelete = (id) => {
-    fetch(`http://localhost:5000/cart/id/${id}`,{
+    fetch(`https://assignment12-blue.vercel.app/cart/id/${id}`,{
       method: "DELETE"
     })
     .then(res => res.json())
     .then(result => {
        
 Swal.fire({
-  position: 'top-end',
-  icon: 'center',
+  position: 'center',
+  icon: 'success',
   title: 'Deleted Sucessfully',
   showConfirmButton: false,
   timer: 1500

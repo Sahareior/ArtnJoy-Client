@@ -2,12 +2,15 @@ import { useForm } from 'react-hook-form';
 import Heading from '../../Shared/Heading';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
 const AddClass = () => {
   const { register, handleSubmit,reset } = useForm();
   const {user} = useAuth()
   
-
+  useEffect(() => {
+    document.title = "Add Class"; // Update the title here
+  }, []);
   const onSubmit = (data) => {
     const { className, classImage, availableSeats, price } = data;
     const email = user.email 
@@ -23,7 +26,7 @@ const AddClass = () => {
       name,
       status: 'pending',
     };
-    fetch('http://localhost:5000/class',{
+    fetch('https://assignment12-blue.vercel.app/class',{
         method: "POST",
         headers:{
             'content-type':'application/json'

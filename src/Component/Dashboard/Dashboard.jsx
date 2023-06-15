@@ -2,6 +2,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import useUsers from '../hooks/useUsers';
 import useAuth from '../hooks/useAuth';
+import { useEffect } from 'react';
 
 
 const Dashboard = () => {
@@ -12,6 +13,9 @@ const Dashboard = () => {
   const isExist = users.find((data) => data.email === userEmail);
   const role = isExist?.role;
   const isInstructor = isExist?.instructor === 'yes';
+  useEffect(() => {
+    document.title = "Dashboard"; // Update the title here
+  }, []);
   return (
     <div>
       <div className="drawer lg:drawer-open">

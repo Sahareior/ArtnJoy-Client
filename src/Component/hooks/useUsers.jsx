@@ -6,7 +6,7 @@ const useUsers = () => {
     const {data: users = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async() => {
-            const res = await fetch('http://localhost:5000/users',{
+            const res = await fetch('https://assignment12-blue.vercel.app/users',{
                 headers: {
                     Authorization: `Bearer ${token}` // Replace `accessToken` with your actual token variable
                   }

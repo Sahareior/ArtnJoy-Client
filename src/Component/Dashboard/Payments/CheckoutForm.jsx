@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const CheckoutForm = ({info,total,id}) => {
   // const {_id,info} = cart
@@ -17,7 +18,7 @@ console .log(info.info.email)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://assignment12-blue.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ totalPrice:total }),
@@ -81,7 +82,7 @@ if (paymentIntent.status === 'succeeded'){
     
     
   }
-  fetch('http://localhost:5000/payment',{
+  fetch('https://assignment12-blue.vercel.app/payment',{
     method:'POST',
     headers:{
       'content-type': 'application/json'
@@ -99,7 +100,7 @@ Swal.fire({
   timer: 1500
 })
     console.log(result)
-    fetch('http://localhost:5000/students',{
+    fetch('https://assignment12-blue.vercel.app/students',{
       method:'POST',
       headers:{
         'content-type': 'application/json'
@@ -109,7 +110,7 @@ Swal.fire({
     .then(res=> res.json())
     .then(result => {
       console.log(result)
-      fetch(`http://localhost:5000/students/${className}`,{
+      fetch(`https://assignment12-blue.vercel.app/students/${className}`,{
         method:'PATCH'
        
       })
@@ -138,7 +139,9 @@ Swal.fire({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+    <div>
+      
+          <form onSubmit={handleSubmit} className="max-w-md mb-7 mx-auto">
       <div className="mb-4">
         <CardElement className="p-2 border border-gray-300 rounded" options={cardElementOptions} />
       </div>
@@ -150,6 +153,8 @@ Swal.fire({
         Pay
       </button>
     </form>
+    
+    </div>
   );
 };
 

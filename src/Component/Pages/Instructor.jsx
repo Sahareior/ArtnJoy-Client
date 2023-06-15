@@ -3,10 +3,15 @@ import { useEffect, useState } from "react";
 const Instructor = () => {
     const [data,setData] = useState([])
     const token = localStorage.getItem('access-token');
+
+    useEffect(() => {
+      document.title = "Instructor"; // Update the title here
+    }, []);
+
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/users', {
+          const response = await fetch('https://assignment12-blue.vercel.app/users', {
             
             headers: {
               Authorization: `Bearer ${token}` // Replace `accessToken` with your actual token variable

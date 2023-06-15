@@ -7,13 +7,17 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
 import Heading from "../../Shared/Heading";
+import { useEffect } from "react";
 const Banner = () => {
+  useEffect(() => {
+    document.title = "Art&Joy"; // Update the title here
+  }, []);
   return (
-    <div className="p-16 w-[500px]">
+    <div className="p-16 w-[500px] md:w-full">
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         <SwiperSlide>
           <div
-            className="md:w-full w-[400px] md:h-[800px] "
+          className="md:w-full w-[400px] md:h-[800px] "
             style={{
               backgroundImage:
                 "url('https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/hero_home_02-slider.jpg')",

@@ -3,18 +3,22 @@ import useUsers from "../../hooks/useUsers";
 
 const ManageUsers = () => {
   const [users, loading, refetch] = useUsers();
+  useEffect(() => {
+    document.title = "ManageClass"; // Update the title here
+  }, []);
 
   const makeAdmin = async (id) => {
     const data = { role: "admin" };
 
     try {
-      await fetch(`http://localhost:5000/users/${id}`, {
+      await fetch(`https://assignment12-blue.vercel.app/users/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       });
+      
 
       console.log("Admin role updated successfully");
       refetch();
@@ -27,7 +31,7 @@ const ManageUsers = () => {
     const data = { role: "none" };
 
     try {
-      await fetch(`http://localhost:5000/users/${id}`, {
+      await fetch(`https://assignment12-blue.vercel.app/users/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +50,7 @@ const ManageUsers = () => {
     const data = { instructor: isIns };
 
     try {
-      await fetch(`http://localhost:5000/users/${id}`, {
+      await fetch(`https://assignment12-blue.vercel.app/users/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +69,7 @@ const ManageUsers = () => {
     const data = { instructor: isIns };
 
     try {
-      await fetch(`http://localhost:5000/users/${id}`, {
+      await fetch(`https://assignment12-blue.vercel.app/users/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

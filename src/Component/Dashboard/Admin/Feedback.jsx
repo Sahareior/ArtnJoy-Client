@@ -13,7 +13,7 @@ const Feedback = () => {
         const data = e.target.feedback.value 
         console.log(data)
         if(data.length>8){
-            fetch(`http://localhost:5000/class/${id}`,{
+            fetch(`https://assignment12-blue.vercel.app/class/${id}`,{
                 method:'PATCH',
                 headers:{
                     'content-type': 'application/json'

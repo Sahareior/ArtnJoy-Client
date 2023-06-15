@@ -61,15 +61,16 @@ const MyProvider = ({ children }) => {
       setLoading(false);
       if (loggedUser) {
         axios
-          .post("http://localhost:5000/jwt", { email: loggedUser.email })
+          .post("https://assignment12-blue.vercel.app/jwt", { email: loggedUser.email })
           .then((data) => {
             // console.log(data.data.token)
+            
             localStorage.setItem("access-token", data.data.token);
             setLoading(false);
             const name = loggedUser?.name ?? 'anonymous'
             const email = loggedUser?.email 
             const data1 = {name,email}
-            fetch("http://localhost:5000/users", {
+            fetch("https://assignment12-blue.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

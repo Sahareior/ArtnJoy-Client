@@ -9,11 +9,14 @@ const PaymentHistory = () => {
     console.log(user.email)
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch(`http://localhost:5000/payment/${user.email}`)
+        fetch(`https://assignment12-blue.vercel.app/payment/${user.email}`)
         .then(res=> res.json())
         .then(result=>setData(result))
     },[user.email])
-    console.log(data)
+  
+    useEffect(() => {
+      document.title = "History"; // Update the title here
+    }, []);
     return (
         <div>
             <Heading des={"All Payments"}></Heading>
@@ -31,6 +34,7 @@ const PaymentHistory = () => {
 
         <th>Date</th>
         <th>Price</th>
+        <th>Class</th>
         <th>transactionId</th>
       </tr>
     </thead>
@@ -48,6 +52,7 @@ const PaymentHistory = () => {
       {info.date}
         </td>
         <td>{info.total}</td>
+        <th><td>{info.info.info.className}</td></th>
         <th>
           <td>{info.transactionId}</td>
         </th>

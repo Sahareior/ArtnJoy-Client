@@ -5,14 +5,20 @@ import PopulerIns from "./PopulerIns";
 
 const PopulerClasses = () => {
     const [data, setData] = useState([])
+    const [ins,setIns] = useState([])
     useEffect(()=>{
-        fetch('ins.json')
+        fetch('https://assignment12-blue.vercel.app/classes')
         .then(res=> res.json())
         .then(result=>setData(result))
     },[])
-console.log("data",data)
+useEffect(()=>{
+    fetch('https://assignment12-blue.vercel.app/instructor')
+    .then(res => res.json())
+    .then(result => setIns(result))
+},[])
+
     
-    let sortedArray =data?.sort(function (a, b) {  return b.students - a.students;  });
+    let sortedArray =ins?.sort(function (a, b) {  return b.students - a.students;  });
     console.log(sortedArray)
     return (
         <div className="mt-20">
