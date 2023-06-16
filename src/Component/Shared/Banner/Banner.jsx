@@ -1,12 +1,14 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useUsers from "../../hooks/useUsers";
+import { Vortex } from "react-loader-spinner";
 
 const Banner = ({ info }) => {
   const { user } = useAuth();
   const [users, loading, refetch] = useUsers();
   console.log(users);
-  const isExists = users?.filter((find) => find.email === user?.email);
+  const isExists = Array.isArray(users) && users.filter((find) => find.email === user?.email);
+  
 //   console.log(isExists[0].role);
 console.log(info)
 
@@ -35,6 +37,18 @@ console.log(info)
         });
     }
   };
+
+  if(loading){
+    return  <Vortex
+    visible={true}
+    height="80"
+    width="80"
+    ariaLabel="vortex-loading"
+    wrapperStyle={{}}
+    wrapperClass="vortex-wrapper"
+    colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
+  />
+  }
 
   const isAdmin = isExists[0]?.role === "admin";
   const isInstructor = isExists[0]?.instructor === "yes";

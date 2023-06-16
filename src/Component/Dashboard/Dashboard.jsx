@@ -11,7 +11,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [users] = useUsers();
   const userEmail = user?.email;
-  const isExist = users.find((data) => data.email === userEmail);
+  const isExist =  Array.isArray(users) && users.find((data) => data.email === userEmail);
   const role = isExist?.role;
   const isInstructor = isExist?.instructor === 'yes';
   useEffect(() => {

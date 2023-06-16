@@ -9,7 +9,7 @@ const Nav = () => {
   // w-[1140px]
   return ( 
   
-  <div className='navbar  mx-auto fixed text-white max-w-screen-2xl z-10 bg-opacity-30 bg-black'>
+  <div className='navbar w-[1140px] ml-12 fixed text-white max-w-screen-2xl z-10 bg-opacity-30 bg-black'>
    
       <div className="navbar-start">
         <div className="dropdown">
@@ -43,10 +43,10 @@ const Nav = () => {
         {/* <a className=""><FaInstagram /></a>
         <a className=""><FaYoutube /></a>
         <a className=""><FaFacebook /></a> */}
-        {user && <p className="mr-9">Hi {user?.displayName}</p>}
-        <div className="dropdown dropdown-end">
+        {/* {user && <p className="mr-9">Hi {user?.displayName}</p>} */}
+        <div className="dropdown ml-9 dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            {user ? '' : <h1 className="text-xs font-b">Login?</h1>}
+            {user ? '' : <h1 className="text-xs mr-4 font-b"><button className='btn btn-accent'>Login</button></h1>}
             <div className="w-10 rounded-full">
               <img src={user?.photoURL} alt="" />
             </div>

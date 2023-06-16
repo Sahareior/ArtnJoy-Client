@@ -1,16 +1,31 @@
 import React from 'react';
 import useUsers from '../hooks/useUsers';
 import useAuth from '../hooks/useAuth';
+import { Vortex } from 'react-loader-spinner';
 
 const DefaultPage = () => {
     const{user} = useAuth()
-    const [users] = useUsers()
+    const [users,loading] = useUsers()
   
     const email = user?.email 
-    const isExists = users.find(data => data.email == email)
+    const isExists = Array.isArray(users) &&  users.find(data => data.email == email)
 
     const admin = isExists?.role === 'admin'
     const instructor = isExists?.instructor === 'yes'
+
+      // Display loading state while users data is being fetched
+  if (loading) {
+    return   <Vortex
+    visible={true}
+    height="80"
+    width="80"
+    ariaLabel="vortex-loading"
+    wrapperStyle={{}}
+    wrapperClass="vortex-wrapper"
+    colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
+  />
+  }
+
 
 
   return (
