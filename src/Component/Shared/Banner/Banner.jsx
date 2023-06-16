@@ -8,6 +8,7 @@ const Banner = ({ info }) => {
   console.log(users);
   const isExists = users?.filter((find) => find.email === user?.email);
 //   console.log(isExists[0].role);
+console.log(info)
 
   const userEmail = user?.email;
   console.log(info.availableSeats);
@@ -40,20 +41,20 @@ const Banner = ({ info }) => {
   const isButtonDisabled = isAdmin || isInstructor || info.availableSeats === 0;
 
   return (
-    <div
-      className="w-full relative h-[720px]"
-      style={{ backgroundImage: `url(${info.classImage})`, backgroundRepeat: "no-repeat" }}
-    >
-      <div className="absolute right-0 flex flex-col gap-4 justify-center items-center top-28">
-        <h1 className="text-5xl font-bold"> {info.subject}</h1>
-        <h1 className="text-xl">instructor: {info.name}</h1>
-        <h1 className="text-xl">Available seats: {info.students}</h1>
-        <h1 className="text-xl">Price: {info.price}</h1>
-        <button onClick={() => handleClick(info)} className="btn btn-secondary" disabled={isButtonDisabled}>
-          Select
-        </button>
+    <div className="card card-compact w-96 p-8 bg-base-100 shadow-xl">
+    <figure><img src={info.classImage} alt="" /></figure>
+    <div className="card-body">
+      <h2 className="card-title">{info.className}</h2>
+      <p>Instructor :{info.name}</p>
+      <p>Available Seats: {info.availableSeats}</p>
+      <p>Price: {info.price}</p>
+      <div className="card-actions justify-end">
+      <button onClick={() => handleClick(info)} className="btn btn-secondary" disabled={isButtonDisabled}>
+            Select
+          </button>
       </div>
     </div>
+  </div>
   );
 };
 

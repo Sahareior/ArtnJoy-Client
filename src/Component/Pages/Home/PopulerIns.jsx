@@ -1,5 +1,5 @@
 const PopulerIns = ({ newArray }) => {
-  console.log(newArray);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-y-28 gap-x-14 gap-5 mt-20">
       {newArray.map((data, index) => (

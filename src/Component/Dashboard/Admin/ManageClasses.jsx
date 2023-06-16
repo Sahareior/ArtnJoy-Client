@@ -1,19 +1,25 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const ManageClasses = () => {
+  const {user} = useAuth()
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["class"],
+    queryKey: ["class",user.email],
     queryFn: async () => {
       const res = await fetch("https://assignment12-blue.vercel.app/class");
       return res.json();
     },
   });
-
+console.log(data)
   useEffect(() => {
     document.title = "ManageClass"; // Update the title here
   }, []);
+
+  
+  // "denied" "approved"
 
   const { mutate: updateClassStatus } = useMutation(
     async ({ id, data }) => {
@@ -30,12 +36,26 @@ const ManageClasses = () => {
 
   const handleApprove = (id) => {
     updateClassStatus({ id, data: "approved" })
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Approved',
+      showConfirmButton: false,
+      timer: 1500
+    })
       refetch();
     
   };
 
   const handleDeny = (id) => {
     updateClassStatus({ id, data: "denied" })
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Denied',
+      showConfirmButton: false,
+      timer: 1500
+    })
       refetch();
 
   };
@@ -88,6 +108,7 @@ const ManageClasses = () => {
                 <th>
                 
                     <button
+                     disabled={info.status === "denied" || info.status ==="approved"}
                       onClick={() => handleApprove(info._id)}
                       className="btn btn-ghost hover:btn-secondary btn-xs"
                     >
@@ -98,6 +119,8 @@ const ManageClasses = () => {
                 <th>
                   
                     <button
+                   
+                    disabled={info.status === "denied" || info.status ==="approved"}
                       onClick={() => handleDeny(info._id)}
                       className="btn btn-ghost hover:btn-warning btn-xs"
                     >

@@ -17,18 +17,19 @@ const EnrolledClasses = () => {
     .then(res => res.json())
     .then(result => setData(result))
   },[user.email])
- console.log(data)
+
     return (
         <div>
             <Heading des={"Enrolled Class"}></Heading>
             <div className="grid grid-cols-2 gap-6">
                 {
                     // data.map(item => console.log(item.info.info.subject))
-                    data.map(item => <div className="card w-96 bg-base-100 shadow-xl" key={item._id}>
-                         <figure><img src={item?.info?.info?.classImage} alt="Shoes" /></figure>
+                    data.map(item => <div className="card w-80 bg-base-100 shadow-xl" key={item._id}>
+                         <figure><img className="w-52" src={item?.info?.info?.classImage} alt="Shoes" /></figure>
                     <div className="card-body">
                       <h2 className="card-title">{item?.info?.info?.className}</h2>
-                      <p>Instructor:  {item?.info?.info?.email}</p>
+                      <p className="font-semibold text-yellow-500">Instructor Email:  {item?.info?.info?.email}</p>
+                      <p>Price:  {item?.info?.info?.price} $</p>
                     </div>
                    
                   </div>)

@@ -1,25 +1,28 @@
 import { useEffect, useState } from "react";
 import Heading from "../../Shared/Heading";
 import PopulerIns from "./PopulerIns";
+import axios from "axios";
 
 
 const PopulerClasses = () => {
     const [data, setData] = useState([])
     const [ins,setIns] = useState([])
-    useEffect(()=>{
-        fetch('https://assignment12-blue.vercel.app/classes')
-        .then(res=> res.json())
-        .then(result=>setData(result))
-    },[])
-useEffect(()=>{
-    fetch('https://assignment12-blue.vercel.app/instructor')
-    .then(res => res.json())
-    .then(result => setIns(result))
-},[])
+
+ useEffect(() => {
+  axios.get('https://assignment12-blue.vercel.app/classes')
+    .then((response) => setData(response.data))
+    .catch((error) => console.error(error));
+}, []);
+
+useEffect(() => {
+  axios.get('https://assignment12-blue.vercel.app/instructor')
+    .then((response) => setIns(response.data))
+    .catch((error) => console.error(error));
+}, []);
 
     
     let sortedArray =ins?.sort(function (a, b) {  return b.students - a.students;  });
-    console.log(sortedArray)
+
     return (
         <div className="mt-20">
            <div className="mr-[700px] md:mr-0"> <Heading title={"Populer Classes"} des={"Here is our populer Classes"}></Heading></div>

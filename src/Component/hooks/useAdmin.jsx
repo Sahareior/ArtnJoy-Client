@@ -10,7 +10,7 @@ const email = user?.email
     const {data: admin = [], isLoading: Adminloading, refetch} = useQuery({
         queryKey: ['users',email],
         queryFn: async() => {
-            const res = await fetch(`http://localhost:5000/users/email/${email}`,{
+            const res = await fetch(`https://assignment12-blue.vercel.app/users/email/${email}`,{
                 headers: {
                     Authorization: `Bearer ${token}` // Replace `accessToken` with your actual token variable
                   }

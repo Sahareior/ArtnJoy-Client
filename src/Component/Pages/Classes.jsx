@@ -20,7 +20,7 @@ const Classes = () => {
               <h1 className="absolute font-mono left-72 text-5xl text-yellow-400 top-52">Our Classes......</h1>
                 <h1 className="absolute font-thin right-80 text-5xl text-white bottom-52" >Select your Favorite one!!</h1>
             </div>
-           <div className="mt-14 p-7">
+           <div className="mt-14 grid grid-cols-3  gap-5">
            {
                 data.map((info,index) => <Banner key={index} info={info}></Banner>)
             }

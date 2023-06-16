@@ -27,6 +27,7 @@ import Update from './Component/Dashboard/Instructor/Update.jsx';
 import PrivateRoute from './Component/Routes/PrivateRoute.jsx';
 import PaymentHistory from './Component/Dashboard/Student/PaymentHistory.jsx';
 import ErrorPage from './Component/Routes/ErrorPage.jsx';
+import DefaultPage from './Component/Dashboard/DefaultPage.jsx';
 
 const queryClient = new QueryClient();
 
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'class',
-        element: <Classes></Classes>,
+        element: <PrivateRoute><Classes></Classes></PrivateRoute>,
       },
       {
         path: 'reg',
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
     path: 'dashboard',
     element: <Dashboard></Dashboard>,
     children: [
+      {
+        path: "",
+        element:<DefaultPage></DefaultPage>
+      },
       {
         path: 'selected',
         element: <PrivateRoute><SelectedClasses></SelectedClasses></PrivateRoute>,

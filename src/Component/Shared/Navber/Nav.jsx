@@ -1,13 +1,15 @@
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { useState } from 'react';
+
 
 const Nav = () => {
   const { logout, user } = useAuth();
-  const [darkMode, setDarkMode] = useState(false);
-
-  return ( <div className='navbar w-[1240px] fixed text-white max-w-screen-2xl z-10 bg-opacity-30 bg-black'>
+ 
+  // w-[1140px]
+  return ( 
+  
+  <div className='navbar  mx-auto fixed text-white max-w-screen-2xl z-10 bg-opacity-30 bg-black'>
    
       <div className="navbar-start">
         <div className="dropdown">
@@ -60,12 +62,7 @@ const Nav = () => {
           </ul>
         </div>
       </div>
-      <button
-        className="btn btn-ghost"
-        onClick={() => setDarkMode(!darkMode)}
-      >
-        {darkMode ? 'Light' : 'Dark'} Mode
-      </button>
+
     </div>
   );
 };

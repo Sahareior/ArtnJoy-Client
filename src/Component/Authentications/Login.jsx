@@ -45,9 +45,7 @@ const Login = () => {
     }
   };
 
-  const svgRef = useRef(null);
-  const pathRef1 = useRef(null);
-  const pathRef2 = useRef(null);
+
   const h1Ref = useRef(null);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const Login = () => {
       translateX: ['-100%', '0%'],
       opacity: [0, 1],
       easing: 'easeInOutSine',
-      duration: 1500,
+      duration: 2500,
     });
 
     return () => {

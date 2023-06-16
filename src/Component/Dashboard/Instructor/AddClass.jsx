@@ -14,7 +14,7 @@ const AddClass = () => {
   const onSubmit = (data) => {
     const { className, classImage, availableSeats, price } = data;
     const email = user.email 
-    const name = user?.name || "anonymous" 
+    const name = user?.displayName|| "anonymous" 
 
     // Create a new class object with the form values
     const newClass = {
@@ -39,7 +39,7 @@ const AddClass = () => {
 Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Your work has been saved',
+  title: 'Added successfully',
   showConfirmButton: false,
   timer: 1500
 })

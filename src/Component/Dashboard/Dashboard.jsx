@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import useUsers from '../hooks/useUsers';
 import useAuth from '../hooks/useAuth';
 import { useEffect } from 'react';
+import { FaBeer, FaBookOpen, FaBookReader, FaBookmark, FaDAndDBeyond, FaEdit, FaMoneyCheck, FaUsers } from 'react-icons/fa';
 
 
 const Dashboard = () => {
@@ -34,33 +35,33 @@ const Dashboard = () => {
             {role === 'admin' && (
               <div>
                 <li>
-                  <Link to="/dashboard/classes">Manage Classes</Link>
+                  <Link to="/dashboard/classes"><FaBookOpen></FaBookOpen> Manage Classes</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/users">Manage users</Link>
+                  <Link to="/dashboard/users"><FaUsers></FaUsers> Manage users</Link>
                 </li>
               </div>
             )}
             {isInstructor && (
               <div>
                 <li>
-                  <Link to="/dashboard/addclass">Add a class</Link>
+                  <Link to="/dashboard/addclass"><FaEdit></FaEdit> Add a class</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myclass">My Classes</Link>
+                  <Link to="/dashboard/myclass"><FaBookReader></FaBookReader> My Classes</Link>
                 </li>
               </div>
             )}
             {role !== 'admin' && !isInstructor && (
               <div>
                 <li>
-                  <Link to="/dashboard/selected">My Selected Classes</Link>
+                  <Link to="/dashboard/selected"><FaBookmark></FaBookmark> My Selected Classes</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/enrolled">My Enrolled Classes</Link>
+                  <Link to="/dashboard/enrolled"><FaDAndDBeyond></FaDAndDBeyond> My Enrolled Classes</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/history">My Payments</Link>
+                  <Link to="/dashboard/history"><FaMoneyCheck></FaMoneyCheck> My Payments</Link>
                 </li>
               </div>
             )}

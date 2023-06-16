@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const Update = () => {
   const location = useLocation();
+  const {user} = useAuth()
+  const email = user?.email
   const {_id, className, classImage, price, availableSeats } = location.state;
   const [name, setName] = useState(className);
   const [image, setImage] = useState(classImage);
@@ -24,6 +27,7 @@ const Update = () => {
       image,
       cost,
       seats,
+      email
     };
 console.log(formData)
 
@@ -40,7 +44,7 @@ fetch(`https://assignment12-blue.vercel.app/class/${_id}`,{
   Swal.fire({
     position: 'center',
     icon: 'success',
-    title: 'Your work has been saved',
+    title: 'Please wait for admin to review your update',
     showConfirmButton: false,
     timer: 1500
   })
